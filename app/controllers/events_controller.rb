@@ -6,6 +6,8 @@ class EventsController < ApplicationController
     @events = Event.all
     @past_events = Event.past
     @description_concert = Event.description_concert
+    @events_on_wednesday= Event.wednesday_events(3)
+    @current_month=Event.current_month
   end
 
   # GET /events/1 or /events/1.json
@@ -70,15 +72,19 @@ class EventsController < ApplicationController
       params.require(:event).permit(:name, :description, :date, :location)
     end
 
+    #Future Events
     def upcoming
       @events = Event.upcoming
     end
 
+    #Past events
     def past
       @events = Event.past
     end
 
+    #Events on Wedenesday
     def wednesday_events
-      @events = Event.on_day(3) # 3 corresponde a miércoles
+      @events = Event.wednesday_events(3) # 3 corresponde a miércoles
     end
+    
 end

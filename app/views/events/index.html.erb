@@ -14,6 +14,7 @@
 </div>
 
 <%= link_to "New event", new_event_path %>
+<br><br>
 
 <h2>Eventos con conciertos</h2>
 <ul>
@@ -21,6 +22,7 @@
     <%= render partial: 'event', locals: { event: event } %>
   <% end %>
 </ul>
+<br>
 
 <h2>Eventos Transcurridos en el pasado</h2>
 <ul>
@@ -28,3 +30,12 @@
   <%= render partial: 'event', locals: {event: event }%>
   <% end %>
 </ul>
+<br>
+
+  <h2>Eventos del mes actual</h2>
+  <ul>
+  <%Event.current_month.each do |event|%>
+  <%= render partial: 'event', locals: {event: event }%>
+  <% end %>
+</ul>
+<br>

@@ -1,6 +1,9 @@
 class Event < ApplicationRecord
   has_many :attendees, dependent: :destroy
 
+  #Callbacks
+# before_action :show, :inde
+
   # Validaciones
   validates :name, :date, presence: true
 
@@ -14,8 +17,8 @@ class Event < ApplicationRecord
   # Eventos del mes actual
   scope :current_month, -> { where(date: Time.now.beginning_of_month..Time.now.end_of_month) }
 
-  # Eventos que ocurren en un día específico (por ejemplo, miércoles)
-  scope :on_day, ->(day) {
+  # Eventos que ocurren el miércoles
+  scope :wednesday_events, ->(day) {
     where("EXTRACT(DOW FROM date) = ?", day)
   }
 
