@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    @past_events = Event.past
+    @description_concert = Event.description_concert
   end
 
   # GET /events/1 or /events/1.json
@@ -66,5 +68,17 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:name, :description, :date, :location)
+    end
+
+    def upcoming
+      @events = Event.upcoming
+    end
+
+    def past
+      @events = Event.past
+    end
+
+    def wednesday_events
+      @events = Event.on_day(3) # 3 corresponde a miércoles
     end
 end
